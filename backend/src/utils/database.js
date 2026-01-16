@@ -1,0 +1,85 @@
+import pg from 'pg';
+
+const { Pool } = pg;
+
+let pool;
+
+/**
+ * Initialize database connection pool
+ * @returns {Pool} PostgreSQL connection pool
+ */
+const initializePool = () => {
+	if (!pool) {
+		pool = new Pool({
+			host: process.env.DB_HOST,
+			port: process.env.DB_PORT,
+			database: process.env.DB_NAME,
+			user: process.env.DB_USER,
+			password: process.env.DB_PASSWORD,
+			max: 20,
+			idleTimeoutMillis: 30000,
+			connectionTimeoutMillis: 10000,
+			ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+		});
+
+		pool.on("error", (err) => {
+			console.error("Unexpected error on idle client", err);
+		});
+	}
+	return pool;
+};
+
+/**
+ * Connect to the database and test connection
+ */
+export const connectDB = async () => {
+	try {
+		const dbPool = initializePool();
+		const client = await dbPool.connect();
+		console.log("✅ Connected to PostgreSQL database");
+		client.release();
+	} catch (error) {
+		console.error("❌ Failed to connect to database:", error.message);
+		throw error;
+	}
+};
+
+/**
+ * Execute a database query
+ * @param {string} text - SQL query string
+ * @param {Array} params - Query parameters
+ * @returns {Promise<Object>} Query result
+ */
+export const query = async (text, params = []) => {
+	const dbPool = initializePool();
+	const start = Date.now();
+
+	try {
+		const result = await dbPool.query(text, params);
+		const duration = Date.now() - start;
+
+		if (process.env.NODE_ENV === 'development') {
+			console.log(`Query executed in ${duration}ms, rows: ${result.rowCount}`);
+		}
+
+		return result;
+	} catch (error) {
+		console.error("Database query error:", error.message);
+		throw error;
+	}
+};
+
+/**
+ * Get a database client for transactions
+ * @returns {Promise<Object>} Database client
+ */
+export const getClient = async () => {
+	const dbPool = initializePool();
+	return await dbPool.connect();
+};
+
+export default {
+	connectDB,
+	query,
+	getClient
+};

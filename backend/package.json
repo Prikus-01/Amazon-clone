@@ -1,0 +1,23 @@
+{
+  "name": "amazon-clone",
+  "version": "1.0.0",
+  "description": "Amazon Clone Backend - E-Commerce API",
+  "license": "MIT",
+  "author": "priyanshu",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "setup:db": "node scripts/setup-database.js",
+    "seed": "node scripts/seed-data.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11",
+    "pg": "^8.17.1"
+  }
+}

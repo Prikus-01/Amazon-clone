@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* Amazon India Color Palette */
+:root {
+    --amazon-dark: #131921;
+    --amazon-secondary: #232f3e;
+    --amazon-light-bg: #eaeded;
+    --amazon-accent: #febd69;
+    --amazon-accent-hover: #f3a847;
+    --amazon-link: #007185;
+    --amazon-link-hover: #c45500;
+    --amazon-orange: #f08804;
+    --amazon-button: #ffd814;
+    --amazon-button-hover: #f7ca00;
+}
+
+/* Custom scrollbar - hide */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Smooth transitions for interactive elements */
+a, button, input, select {
+    transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+    transition-timing-function: ease;
+    transition-duration: 150ms;
+}
+
+/* Amazon button styles */
+.amazon-btn {
+    background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+    border: 1px solid #a88734;
+}
+
+.amazon-btn:hover {
+    background: linear-gradient(to bottom, #f5d78e, #eeb933);
+}
+
+/* Yellow Add to Cart button */
+.amazon-btn-yellow {
+    background: linear-gradient(to bottom, #ffe48b, #ffd814);
+    border: 1px solid #fcd200;
+}
+
+.amazon-btn-yellow:hover {
+    background: linear-gradient(to bottom, #ffd814, #f7ca00);
+}
+
+/* Orange Buy Now button */
+.amazon-btn-orange {
+    background: linear-gradient(to bottom, #ffb84d, #ff9900);
+    border: 1px solid #e68a00;
+}
+
+.amazon-btn-orange:hover {
+    background: linear-gradient(to bottom, #ffa726, #fb8c00);
+}
+
+/* Focus ring for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--amazon-accent);
+    outline-offset: 2px;
+}
+
+/* Product card hover lift effect */
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero carousel gradient overlay */
+.hero-gradient {
+    background: linear-gradient(to top, var(--amazon-light-bg), transparent);
+}
+
+/* Deal badge animation */
+@keyframes pulse-badge {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.deal-badge {
+    animation: pulse-badge 2s infinite;
+}
+
+/* Carousel button visibility on hover */
+.carousel-container:hover .carousel-btn {
+    opacity: 1;
+}
+
+.carousel-btn {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    .carousel-btn {
+        opacity: 1;
+    }
+}
+
+/* Lightning deal progress bar */
+.lightning-bar {
+    background: linear-gradient(90deg, #ff6161, #cc0000);
+    border-radius: 3px;
+}
+
+/* Improved link styling */
+.amazon-link {
+    color: var(--amazon-link);
+}
+
+.amazon-link:hover {
+    color: var(--amazon-link-hover);
+    text-decoration: underline;
+}
+
+/* Card hover shadow */
+.hover-shadow:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
