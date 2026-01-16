@@ -1,5 +1,5 @@
 // Backend API Service
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = 'https://amazon-clone-vsex.onrender.com/api';
 
 export const api = {
     // ==================== PRODUCTS ====================
