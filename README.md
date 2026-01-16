@@ -2,7 +2,6 @@
 
 A full-stack e-commerce web application that replicates Amazon's design and user experience. Built with React.js frontend, Node.js/Express.js backend, and PostgreSQL database.
 
-![Amazon Clone](https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&h=300&fit=crop)
 
 ---
 
