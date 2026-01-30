@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import StarRating from './StarRating';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { useState } from 'react';
 
 function ProductCard({ product, compact = false }) {
     const { addToCart } = useCart();
     const { isInWishlist, toggleWishlist } = useWishlist();
+    const [showToast, setShowToast] = useState(false);
 
     const discountedPrice = product.price * (1 - (product.discountPercentage || 0) / 100);
     const inWishlist = isInWishlist(product.id);
@@ -14,6 +16,8 @@ function ProductCard({ product, compact = false }) {
         e.preventDefault();
         e.stopPropagation();
         addToCart(product);
+        setShowToast(true);
+        setTimeout(()=> setShowToast(false),2000);
     };
 
     const handleWishlistToggle = (e) => {
@@ -92,6 +96,9 @@ function ProductCard({ product, compact = false }) {
                     Add to Cart
                 </button>
             </div>
+            {showToast && (<div className='fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-6 z-50 flex item-center gap-2'>
+                ADDED to cart
+            </div>)}
         </Link>
     );
 }
